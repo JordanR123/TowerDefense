@@ -1,7 +1,7 @@
 # Co-op 3D Tower Defense
 
 ## Overview
-A cooperative, wave-based **3D tower defense game** where **1–8 players** builds turrets, traps, walls, etc to defend against hordes of enemies. The game emphasizes **co-op strategy, replayability, and persistent progression**: even if players lose, they earn XP toward permanent upgrades, ensuring that every run contributes to long-term growth.
+A cooperative, wave-based **3D tower defense game** where **1–8 players** builds turrets, traps, walls, and etc to defend against hordes of enemies. The game emphasizes **co-op strategy, replayability, and persistent progression**: even if players lose, they earn XP toward permanent upgrades, ensuring that every run contributes to long-term growth.
 
 ---
 
