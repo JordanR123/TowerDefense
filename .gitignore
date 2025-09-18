@@ -1,0 +1,36 @@
+# --- Unity project in subfolder TowerDefense/ ---
+
+# Unity generated folders
+TowerDefense/[Ll]ibrary/
+TowerDefense/[Tt]emp/
+TowerDefense/[Oo]bj/
+TowerDefense/[Bb]uild/
+TowerDefense/[Bb]uilds/
+TowerDefense/[Ll]ogs/
+TowerDefense/[Mm]emoryCaptures/
+TowerDefense/UserSettings/
+TowerDefense/sysinfo.txt
+TowerDefense/[Pp]ackageCache/
+
+# Visual Studio / Rider
+.vs/
+*.csproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.tmp
+*.pidb
+*.booproj
+*.svd
+.idea/
+*.mdb
+*.opendb
+*.VC.db
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Crash Reports
+*.stackdump
