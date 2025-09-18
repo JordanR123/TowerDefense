@@ -1,15 +1,15 @@
 # Co-op 3D Tower Defense
 
 ## Overview
-A cooperative, wave-based **3D tower defense game** where **1–8 players** build turrets, traps, and walls to defend against hordes of enemies. The game emphasizes **co-op strategy, replayability, and persistent progression**: even if players lose, they earn XP toward permanent upgrades, ensuring that every run contributes to long-term growth.
+A cooperative, wave-based **3D tower defense game** where **1–8 players** builds turrets, traps, walls, etc to defend against hordes of enemies. The game emphasizes **co-op strategy, replayability, and persistent progression**: even if players lose, they earn XP toward permanent upgrades, ensuring that every run contributes to long-term growth.
 
 ---
 
 ## Vision
 - **Co-op First**: Designed for up to 8 players, with seamless join/invite via Steam lobbies.  
-- **Dynamic Building**: Place turrets, traps, and walls on a snap-to-grid system during and between waves.  
+- **Dynamic Building**: Place turrets, traps, walls, etc on a snap-to-grid system during and between waves.  
 - **Replayable Waves**: Procedural modifiers, enemy mixes, and scaling bosses for endless variety.  
-- **Persistent Progression**: XP → Account Levels → Permanent upgrades that enhance future runs.  
+- **Persistent Progression**: XP → Account Levels → Permanent upgrades that enhance future runs.
 
 ---
 
@@ -127,7 +127,7 @@ A cooperative, wave-based **3D tower defense game** where **1–8 players** buil
 - **Packages**:  
   - AI Navigation  
   - Input System  
-  - Cinemachine (optional)  
+  - Cinemachine (optional) 
   - Steamworks.NET + Fish-Networking  
 - **Conventions**:  
   - Units: 1 Unity unit = 1 meter.  
