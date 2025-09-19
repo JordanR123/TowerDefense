@@ -1,80 +1,80 @@
 # Co-op 3D Tower Defense
 
-A cooperative, wave-based **3D tower defense** for **1–8 players**. Build turrets, traps, and walls to defend against hordes. Even on defeat, teams earn **XP** toward **permanent account upgrades** (damage, attack speed, currency, movement, build discounts), so every run advances long-term progression. Players can also actively **shoot enemies** during waves.
+## Overview
+A cooperative, wave-based **3D tower defense game** built in Unity using the **FPS Engine** as a foundation.  
+Players combine **first-person combat** with **strategic turret placement** to survive against endless waves of enemies.  
+The game emphasizes **co-op strategy, replayability, and persistent progression**: even if players lose, they earn XP toward permanent upgrades, ensuring that every run contributes to long-term growth.
 
 ---
 
-## Vision & Pillars
-- **Co-op First:** 1–8 players via Steam lobbies/invites; host-authoritative netcode.
-- **Snappy Building:** Grid-snap placement, rotate, upgrade, sell; path rules prevent full seals.
-- **Readable Chaos:** Big waves, clear VFX/UX, strong perf on mid-range GPUs.
-- **Persistent Progression:** XP → levels → permanent bonuses (capped for fairness).
+## Vision
+- **Co-op First**: Designed for 1–8 players, with seamless join/invite through Steam lobbies.  
+- **Hybrid Gameplay**: Players can fight enemies directly (FPS) while also building turrets, traps, and walls.  
+- **Replayable Waves**: Procedural modifiers, enemy mixes, and scaling bosses keep every run fresh.  
+- **Persistent Progression**: XP unlocks permanent buffs and upgrades that carry across games.  
 
 ---
 
-## Core Loop
-1) **Build Phase** – spend team currency; place/upgrade/sell; valid path enforced.  
-2) **Wave Phase** – enemies spawn and path around carved obstacles; **players can shoot**.  
-3) **End of Wave** – lives reduced by leaks; currency & XP awarded.  
-4) **Meta** – XP increases account level, unlocking permanent upgrades.
+## Core Gameplay Loop
+1. **Build Phase**  
+   - Spend currency to place turrets, traps, and walls on a grid.  
+   - Ghost previews and placement rules make building clear and fair.  
+
+2. **Wave Phase**  
+   - Enemies spawn in waves and attempt to reach the base.  
+   - Turrets auto-fire while players actively fight in first-person.  
+   - Currency and XP earned for kills and surviving waves.  
+
+3. **Progression**  
+   - Even on defeat, players earn XP.  
+   - XP unlocks permanent buffs (damage, speed, currency, etc.) that improve future runs.  
 
 ---
 
-## Player Shooting
-- **Mode:** TPS/FPS or top-down twin-stick (decide per map; default TPS).  
-- **Primary Fire:** hitscan or projectile; modest DPS so turrets remain core.  
-- **Balance:** cooldown or ammo to avoid overshadowing towers; team-shared rewards.  
-- **Upgrades:** permanent bonuses also affect player damage/ROF within caps.
+## High-Level Roadmap
+Development is staged so the game grows from a simple solo loop into a full multiplayer experience.  
+Details and acceptance criteria are in [Docs/ROADMAP.md](Docs/ROADMAP.md).
+
+### Stage 0 — Baseline
+- FPS Engine imported and working (movement, shooting, turrets, managers, UI).  
+
+### Stage 1 — Vertical Slice
+- Solo loop: build → wave → reward.  
+- Currency, spawner, and minimal HUD in place.  
+
+### Stage 2 — P0 Must-Haves
+- Build-phase banner + turret ghost.  
+- Enemy & base health bars.  
+- Lose screen with XP + persistent buffs.  
+- First-person camera polish.  
+- Pause menu.  
+- Enemies march directly to base.  
+
+### Stage 3+ — Expansions
+- **Data-Driven Content**: ScriptableObjects for turrets, enemies, waves.  
+- **Build UX v2**: Build menu and stronger placement rules.  
+- **Pathing Rules**: NavMesh carve system to prevent path sealing.  
+- **Juice & Clarity**: VFX, audio, floating damage numbers, pooling.  
+- **Save System v1.5**: JSON saves for XP, buffs, and options.  
+- **Co-op Foundations**: Up to 8-player support via Steam lobby/relay.  
 
 ---
 
-## Permanent Progression
-- **XP Sources:** kills, waves survived, run completion (always granted on loss).  
-- **Account Level:** unlocks tiered bonuses (e.g., +2% dmg, +3% ROF, +5% start money, +5% movement, −3% build costs).  
-- **Fairness:** caps & team scaling tuned for 1–8 players.
+## Tech & Tools
+- **Unity** (2021.1.16 or newer recommended).  
+- **FPS Engine** (base kit providing player controller, turrets, enemies, UI, managers).  
+- **TextMeshPro** for UI clarity.  
+- **NavMesh** for future pathing rules.  
+- **Steamworks / NGO / Photon** (planned for multiplayer).  
 
 ---
 
-## Co-op & Networking
-- **Players:** 1–8 | **Model:** host-authoritative (listen server).  
-- **Transport:** Steam P2P (Steamworks.NET / Facepunch) + Fish-Networking (recommended) or Unity Netcode.  
-- **Authority:** host validates placements, economy, XP; per-player build quotas; min path width rule.  
-- **Session Flow:** host creates lobby → friends join → ready-up → run → summary.
+## Contributing
+- See [Docs/ROADMAP.md](Docs/ROADMAP.md) for detailed milestones and commit examples.  
+- Please make small, atomic commits (e.g., `feat(build): add turret ghost`).  
+- Use branches per feature (`feature/build-ghost`, `feature/health-bars`).  
 
 ---
 
-## MVP Feature Set
-**Defenses**: Single, Splash, Slow, DOT/Flame, Buff; traps (spikes/tar); walls (NavMesh carve)  
-**Enemies**: Runner, Tank, Swarm, Boss (waves 5/10)  
-**Systems**: Wave director (SO-driven; endless toggle), shared currency, HUD (lives, money, wave, XP), **player shooting**  
-**Style**: URP stylized/low-poly for clarity and performance
-
----
-
-## Milestones
-**Sprint 0 — Foundation**  
-URP project; layers; input; Steamworks smoke test (AppID 480 in dev); greybox map; baseline NavMesh.  
-
-**Sprint 1 — Solo Core**  
-Pathing to goal; lives; build grid + ghost; basic turret; 5 waves; simple HUD; **player shooting prototype**.  
-
-**Sprint 2 — Co-op**  
-Steam lobby host/join; sync spawns; authoritative building; currency/XP sharing.  
-
-**Sprint 3 — Progression**  
-XP accrual, level tiers, permanent bonuses; save/load host account.  
-
-**Sprint 4 — Content**  
-Add 2 turrets + 1 trap + 1 enemy + boss mechanics; balance pass.  
-
-**Sprint 5 — Polish**  
-VFX/audio, UX, perf (pooling, LOD, shadows), bug fixes.
-
----
-
-## Tech & Conventions
-- **Unity:** 2022/2023 LTS (URP)  
-- **Packages:** AI Navigation, Input System, (Cinemachine optional), Steamworks.NET, FishNet/NGO  
-- **Units:** 1u = 1m · **Grid:** 1m · **Layers:** `Ground`, `Placeables`, `Enemies`, `Projectiles`, `IgnoreRaycast`  
-- **Data:** ScriptableObjects for enemies, turrets, waves, upgrades  
-- **Folders:**
+## License
+TBD
