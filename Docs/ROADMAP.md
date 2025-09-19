@@ -90,6 +90,9 @@ It’s staged so you can grow from a vertical slice into a co-op game with persi
 ---
 
 ## Done-When Checklist (Vertical Slice)
+
+
+Link to documentation on FPS core: https://cowsinss-organization.gitbook.io/fps-engine-documentation
 - Build phase banner + ghost preview.
 - Enemy + base HP bars visible.
 - Loss → XP + buff choice persists to next run.
