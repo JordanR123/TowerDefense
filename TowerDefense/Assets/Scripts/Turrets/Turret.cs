@@ -3,44 +3,77 @@ using System.Linq;
 
 public class Turret : MonoBehaviour
 {
-    public float range = 8f;
-    public float fireRate = 2.5f;
+    [Header("Firing")]
+    public float range = 12f;
+    public float fireRate = 1.5f;
+
+    [Header("Refs")]
     public Transform muzzle;
     public GameObject bulletPrefab;
-    public LayerMask enemyMask;
+    public LayerMask enemyMask; // should include "Enemies" layer
 
-    private float nextShot;
+    float nextShot;
 
-    private void Update()
+    void OnValidate()
     {
-        if (GameManager.I.CurrentPhase == GameManager.Phase.GameOver) return;
-
-        if (Time.time >= nextShot)
+        // If you forgot to set the mask, try to auto-fill it
+        if (enemyMask.value == 0)
         {
-            var target = FindTarget();
-            if (target != null)
-            {
-                nextShot = Time.time + 1f / fireRate;
-                transform.LookAt(target.position);
-                Fire(target.position);
-            }
+            int enemiesLayer = LayerMask.NameToLayer("Enemies");
+            if (enemiesLayer != -1)
+                enemyMask = 1 << enemiesLayer;
         }
+
+        if (muzzle == null) Debug.LogWarning("[Turret] Muzzle not assigned.", this);
+        if (bulletPrefab == null) Debug.LogWarning("[Turret] Bullet prefab not assigned.", this);
     }
 
-    private Transform FindTarget()
+    void Update()
     {
+        if (Time.time < nextShot) return;
+
+        var target = FindTarget();
+        if (target == null) return;
+
+        nextShot = Time.time + 1f / fireRate;
+
+        // aim & fire
+        Vector3 aim = target.position;
+        transform.rotation = Quaternion.LookRotation((aim - transform.position).normalized, Vector3.up);
+
+        if (muzzle == null || bulletPrefab == null)
+        {
+            Debug.LogError("[Turret] Missing Muzzle or Bullet Prefab.", this);
+            return;
+        }
+
+        var go = Instantiate(bulletPrefab, muzzle.position, Quaternion.LookRotation((aim - muzzle.position).normalized));
+        var b = go.GetComponent<Bullet>();
+        if (b == null)
+        {
+            Debug.LogError("[Turret] Bullet prefab is missing Bullet component.", bulletPrefab);
+            Destroy(go);
+            return;
+        }
+        b.Init(gameObject, 15f, 40f, 2.5f);
+    }
+
+    Transform FindTarget()
+    {
+        if (enemyMask.value == 0)
+        {
+            Debug.LogWarning("[Turret] Enemy mask is 0. Set it to include the 'Enemies' layer.", this);
+            return null;
+        }
+
         var hits = Physics.OverlapSphere(transform.position, range, enemyMask);
         if (hits.Length == 0) return null;
+
+        // nearest enemy
         return hits.OrderBy(h => (h.transform.position - transform.position).sqrMagnitude).First().transform;
     }
 
-    private void Fire(Vector3 aim)
-    {
-        var go = Instantiate(bulletPrefab, muzzle.position, Quaternion.LookRotation((aim - muzzle.position).normalized));
-        go.GetComponent<Bullet>().Init(gameObject, 15f, 40f, 2.5f);
-    }
-
-    private void OnDrawGizmosSelected()
+    void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, range);
