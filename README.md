@@ -7,6 +7,8 @@ The game emphasizes **co-op strategy, replayability, and persistent progression*
 
 ---
 
+
+
 ## Vision
 - **Co-op First**: Designed for 1–8 players, with seamless join/invite through Steam lobbies.  
 - **Hybrid Gameplay**: Players can fight enemies directly (FPS) while also building turrets, traps, and walls.  
